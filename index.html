@@ -219,12 +219,15 @@ section { padding-block: clamp(36px, 6vw, 72px); }
   font-style: normal; font-family: var(--mono); font-size: 8.5px;
   letter-spacing: 2px; color: var(--dim);
 }
-.m1 { transform: translateX(-84px) rotate(-11deg); }
-.m2 { transform: translateY(-8px); z-index: 2; border-color: rgba(233, 161, 59, .6); }
-.m3 { transform: translateX(84px) rotate(11deg); }
+/* мини-веер карт ролей поверх скриншота */
+.mini-fan { position: absolute; right: 18px; bottom: 42px; display: flex; z-index: 2; }
+.mini-fan .mcard { position: static; width: 52px; height: 74px; margin-left: -14px; border-radius: 6px; gap: 0; }
+.mini-fan .msuit { font-size: 20px; }
+.mini-fan .mcard:nth-child(1) { transform: rotate(-10deg) translateY(5px); }
+.mini-fan .mcard:nth-child(2) { z-index: 2; border-color: rgba(233, 161, 59, .6); }
+.mini-fan .mcard:nth-child(3) { transform: rotate(10deg) translateY(5px); }
 
-/* — renthub: окно браузера — */
-.v-rent { padding: 26px 22px 40px; }
+/* — окно браузера — */
 .rwin {
   width: 100%; max-width: 360px; border: 1px solid var(--line-hard); border-radius: 8px;
   background: var(--night-raise); overflow: hidden;
@@ -235,18 +238,11 @@ section { padding-block: clamp(36px, 6vw, 72px); }
 }
 .rbar i { width: 8px; height: 8px; border-radius: 50%; background: var(--line-hard); }
 .rbar span { margin-left: 8px; font-size: 11px; color: var(--dim); }
-.rsearch {
-  margin: 14px 14px 0; padding: 9px 12px; font-size: 11.5px; color: var(--paper);
-  border: 1px solid var(--line-hard); border-radius: 6px; background: var(--night-deep);
-  white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
-}
-.rhits { margin: 8px 16px 0; font-size: 10.5px; color: var(--sodium); }
-.rgrid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px; padding: 12px 14px 16px; }
-.rcard { display: flex; flex-direction: column; gap: 6px; font-size: 10px; color: var(--dim); }
-.rimg { border-radius: 5px; aspect-ratio: 4 / 3; }
-.g1 { background: linear-gradient(140deg, #23405a, #182634); }
-.g2 { background: linear-gradient(140deg, #33564b, #182b26); }
-.g3 { background: linear-gradient(140deg, #57432a, #2b2115); }
+
+/* обложка-скриншот: живой продукт в браузерной рамке */
+.v-shot { padding: 26px 22px 48px; }
+.shot-win { max-width: 420px; box-shadow: 0 26px 52px -22px rgba(0, 0, 0, .85); }
+.shot-img { display: block; width: 100%; height: auto; aspect-ratio: 16 / 10; object-fit: cover; object-position: top; }
 
 /* — автопилот: терминал ночной серии — */
 .v-auto { padding: 26px 22px 44px; align-items: flex-start; }
@@ -453,10 +449,8 @@ header, main, footer { position: relative; z-index: 1; }
   .brand-sub { display: none; }
   .case h3 { font-size: 23px; }
   .case-cover { min-height: 235px; }
-  .m1 { transform: translateX(-62px) rotate(-11deg); }
-  .m3 { transform: translateX(62px) rotate(11deg); }
-  .mcard { width: 84px; height: 120px; }
-  .v-auto, .v-rent { padding: 18px 14px 40px; }
+  .mini-fan { right: 12px; bottom: 38px; }
+  .v-auto, .v-shot { padding: 18px 14px 40px; }
   .term { font-size: 11px; padding: 12px 12px 10px; }
   .wave { height: 52px; }
   .lab-row { flex-direction: column; gap: 6px; }
@@ -528,10 +522,16 @@ header, main, footer { position: relative; z-index: 1; }
           <li>i18n RU/EN</li><li>VPS + gunicorn</li>
         </ul>
       </div>
-      <div class="case-cover v-mafia" aria-hidden="true">
-        <div class="mcard m1"><span class="msuit">♠</span><i>ДОН</i></div>
-        <div class="mcard m2"><span class="msuit">♦</span><i>КАПО</i></div>
-        <div class="mcard m3"><span class="msuit">♣</span><i>КОНСИЛЬЕРИ</i></div>
+      <div class="case-cover v-mafia v-shot" aria-hidden="true">
+        <div class="rwin shot-win">
+          <div class="rbar"><i></i><i></i><i></i><span class="mono">orlando.mafiagame.us</span></div>
+          <img class="shot-img" src="img/mafia.webp" alt="" loading="lazy" width="1920" height="1200">
+        </div>
+        <div class="mini-fan">
+          <div class="mcard"><span class="msuit">♠</span></div>
+          <div class="mcard"><span class="msuit">♦</span></div>
+          <div class="mcard"><span class="msuit">♣</span></div>
+        </div>
         <span class="vtag mono">игры идут · RU/EN</span>
       </div>
     </article>
@@ -551,16 +551,10 @@ header, main, footer { position: relative; z-index: 1; }
           <li>векторный поиск</li><li>E2E-тесты</li>
         </ul>
       </div>
-      <div class="case-cover v-rent" aria-hidden="true">
-        <div class="rwin">
+      <div class="case-cover v-shot" aria-hidden="true">
+        <div class="rwin shot-win">
           <div class="rbar"><i></i><i></i><i></i><span class="mono">renthub.site</span></div>
-          <div class="rsearch mono">аппарат чтобы ездить типа самоката</div>
-          <p class="rhits mono">→ электросамокаты · топ-4 · релевантность</p>
-          <div class="rgrid">
-            <div class="rcard"><div class="rimg g1"></div><span class="mono">450 ₽/сут</span></div>
-            <div class="rcard"><div class="rimg g2"></div><span class="mono">300 ₽/сут</span></div>
-            <div class="rcard"><div class="rimg g3"></div><span class="mono">700 ₽/сут</span></div>
-          </div>
+          <img class="shot-img" src="img/renthub.webp" alt="" loading="lazy" width="1920" height="1200">
         </div>
         <span class="vtag mono">гео: <span class="cnt" data-n="196485">196 485</span> нас. пунктов</span>
       </div>
