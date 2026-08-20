@@ -1,4 +1,15 @@
+<!doctype html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <title>Портфолио KozlovS</title>
+<meta name="description" content="KozlovS — full-stack разработчик: сайты, Telegram-боты, платежи, AI-пайплайны. Живые продукты на боевых серверах, а не макеты.">
+<meta name="theme-color" content="#0f141c">
+<meta property="og:title" content="Портфолио KozlovS">
+<meta property="og:description" content="Один разработчик — целый продукт: сайт, бот, платежи, сервер. Шесть живых кейсов.">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://morphius-ui.github.io/">
 <script>document.documentElement.classList.add('js')</script>
 <style>
 /* ============================================================
@@ -43,6 +54,8 @@
 }
 
 * { box-sizing: border-box; }
+
+html { overflow-x: clip; }
 
 body {
   background: var(--night);
@@ -119,7 +132,7 @@ a { color: inherit; }
 .hero { padding-block: clamp(56px, 9vw, 120px) clamp(48px, 7vw, 96px); position: relative; }
 .hero::before { /* пятно натриевого фонаря над заголовком */
   content: ""; position: absolute; pointer-events: none;
-  top: -160px; left: -180px; width: 640px; height: 520px;
+  top: -160px; left: -180px; width: min(640px, 120vw); height: 520px;
   background: radial-gradient(closest-side, rgba(233, 161, 59, .09), transparent 70%);
 }
 .eyebrow {
@@ -377,7 +390,7 @@ footer {
 
 /* ---------- эффекты: фонарь, пыль, наклон, лог ---------- */
 header, main, footer { position: relative; z-index: 1; }
-#dust { position: fixed; inset: 0; z-index: 0; pointer-events: none; }
+#dust { position: fixed; inset: 0; width: 100%; height: 100%; z-index: 0; pointer-events: none; }
 .lamp { /* пятно натриевого фонаря, плывущее за курсором */
   position: fixed; top: 0; left: 0; width: 520px; height: 520px; z-index: 2;
   pointer-events: none; mix-blend-mode: screen; opacity: 0; transition: opacity .5s ease;
@@ -397,6 +410,29 @@ header, main, footer { position: relative; z-index: 1; }
 ::-webkit-scrollbar-thumb { background: #2b3648; border-radius: 6px; border: 3px solid var(--night-deep); }
 ::-webkit-scrollbar-thumb:hover { background: var(--sodium-deep); }
 
+/* ---------- мобильные эффекты ---------- */
+.progress { /* нить прогресса чтения */
+  position: fixed; top: 0; left: 0; width: 100%; height: 2px; z-index: 6;
+  transform-origin: 0 0; transform: scaleX(0);
+  background: linear-gradient(90deg, var(--sodium), var(--sodium-deep));
+  pointer-events: none;
+}
+.pill-cta { /* плавающая кнопка на телефоне */
+  position: fixed; left: 50%; bottom: calc(18px + env(safe-area-inset-bottom, 0px));
+  z-index: 6; transform: translate(-50%, 160%);
+  transition: transform .45s cubic-bezier(.2, .65, .25, 1);
+  background: var(--sodium); color: #171005; text-decoration: none;
+  font-weight: 700; font-size: 15px; padding: 15px 28px; border-radius: 999px;
+  box-shadow: 0 12px 30px -8px rgba(233, 161, 59, .6), 0 4px 18px rgba(0, 0, 0, .5);
+  display: none; white-space: nowrap;
+}
+.pill-cta.show { transform: translate(-50%, 0); }
+.case-cover.tap::after { opacity: 1; }
+@media (pointer: coarse) {
+  .btn:active { transform: scale(.96); }
+  .pill-cta:active { transform: translate(-50%, 0) scale(.95); }
+}
+
 /* ---------- адаптив ---------- */
 @media (max-width: 880px) {
   .case { grid-template-columns: 1fr; gap: 24px; }
@@ -404,15 +440,35 @@ header, main, footer { position: relative; z-index: 1; }
   .case-cover { order: 0; min-height: 260px; }
   .method-grid { grid-template-columns: 1fr; }
   .stack-row { grid-template-columns: 1fr; gap: 6px; }
+  .pill-cta { display: block; }
+  .hero { padding-block: clamp(40px, 7vw, 72px) clamp(40px, 6vw, 64px); }
 }
 @media (max-width: 560px) {
+  body { font-size: 15.5px; }
+  .hero h1 { font-size: clamp(33px, 10.6vw, 44px); }
+  .lede { font-size: 16.5px; }
+  .hero-cta { margin-top: 30px; }
   .hero-cta .btn { width: 100%; text-align: center; }
-  .facts { flex-direction: column; gap: 10px; }
+  .facts { flex-direction: column; gap: 10px; margin-top: 40px; }
   .brand-sub { display: none; }
-  .m1 { transform: translateX(-64px) rotate(-11deg); }
-  .m3 { transform: translateX(64px) rotate(11deg); }
+  .case h3 { font-size: 23px; }
+  .case-cover { min-height: 235px; }
+  .m1 { transform: translateX(-62px) rotate(-11deg); }
+  .m3 { transform: translateX(62px) rotate(11deg); }
+  .mcard { width: 84px; height: 120px; }
+  .v-auto, .v-rent { padding: 18px 14px 40px; }
+  .term { font-size: 11px; padding: 12px 12px 10px; }
+  .wave { height: 52px; }
+  .lab-row { flex-direction: column; gap: 6px; }
+  .contact { border-radius: 10px; }
+  .contact .hero-cta .btn { overflow: hidden; text-overflow: ellipsis; }
+  footer { flex-direction: column; padding-bottom: 96px; } /* место под pill-cta */
 }
 </style>
+</head>
+<body>
+
+<div class="progress" aria-hidden="true"></div>
 
 <header class="top container">
   <div class="brand">
@@ -736,6 +792,8 @@ header, main, footer { position: relative; z-index: 1; }
   </section>
 </main>
 
+<a class="pill-cta" href="https://t.me/youarethecar">Написать в Telegram</a>
+
 <footer class="container">
   <span>© 2026 KozlovS — собрано руками и AI-агентами, без конструкторов</span>
   <span class="mono">черновик v2 · следующий шаг — живые скриншоты кейсов</span>
@@ -746,6 +804,7 @@ header, main, footer { position: relative; z-index: 1; }
   var doc = document;
   var reduce = matchMedia('(prefers-reduced-motion: reduce)').matches;
   var fine = matchMedia('(pointer: fine)').matches;
+  var coarse = matchMedia('(pointer: coarse)').matches;
 
   /* --- появление блоков при скролле --- */
   var rvs = doc.querySelectorAll('.rv');
@@ -810,6 +869,12 @@ header, main, footer { position: relative; z-index: 1; }
     };
     size();
     addEventListener('resize', size, { passive: true });
+    var wind = { x: 0 }; /* гироскоп телефона сдувает пыль в сторону наклона */
+    if (coarse) {
+      addEventListener('deviceorientation', function (e) {
+        if (e.gamma != null) wind.x = Math.max(-1, Math.min(1, e.gamma / 45)) * .35;
+      }, { passive: true });
+    }
     var N = W < 700 ? 34 : 68;
     for (var i = 0; i < N; i++) {
       ps.push({
@@ -826,7 +891,7 @@ header, main, footer { position: relative; z-index: 1; }
       cx.clearRect(0, 0, W, H);
       for (var j = 0; j < ps.length; j++) {
         var p = ps[j];
-        p.x += p.vx; p.y += p.vy;
+        p.x += p.vx + wind.x; p.y += p.vy;
         if (p.x < -4) p.x = W + 4;
         if (p.y < -4) { p.y = H + 4; p.x = Math.random() * W; }
         var a = .10 + .09 * Math.sin(t / 1000 * p.s + p.p);
@@ -837,6 +902,60 @@ header, main, footer { position: relative; z-index: 1; }
       }
     };
     requestAnimationFrame(tick);
+  }
+
+  /* --- нить прогресса + наклон карточек на скролле (тач) --- */
+  var covers = doc.querySelectorAll('.case-cover');
+  var prog = doc.querySelector('.progress');
+  var scrollTilt = function () {
+    var mid = innerHeight / 2;
+    covers.forEach(function (c) {
+      var r = c.getBoundingClientRect();
+      if (r.bottom < -60 || r.top > innerHeight + 60) return;
+      var d = (mid - (r.top + r.height / 2)) / innerHeight;
+      c.style.transform = 'perspective(900px) rotateX(' + (d * 7).toFixed(2) + 'deg)';
+    });
+  };
+  var ticking = false;
+  var onScrollFx = function () {
+    ticking = false;
+    if (prog) {
+      var h = doc.documentElement.scrollHeight - innerHeight;
+      prog.style.transform = 'scaleX(' + (h > 0 ? scrollY / h : 0) + ')';
+    }
+    if (!fine && !reduce) scrollTilt();
+  };
+  addEventListener('scroll', function () {
+    if (!ticking) { ticking = true; requestAnimationFrame(onScrollFx); }
+  }, { passive: true });
+  onScrollFx();
+
+  /* --- плавающая кнопка Telegram (мобила) --- */
+  var pill = doc.querySelector('.pill-cta');
+  var heroEl = doc.querySelector('.hero');
+  var contactEl = doc.querySelector('#contact');
+  if (pill && heroEl && contactEl && 'IntersectionObserver' in window) {
+    var heroGone = false, contactSeen = false;
+    var pillSync = function () { pill.classList.toggle('show', heroGone && !contactSeen); };
+    new IntersectionObserver(function (es) {
+      heroGone = !es[0].isIntersecting; pillSync();
+    }, { threshold: 0 }).observe(heroEl);
+    new IntersectionObserver(function (es) {
+      contactSeen = es[0].isIntersecting; pillSync();
+    }, { threshold: .15 }).observe(contactEl);
+  }
+
+  /* --- вспышка-блик по тапу на обложке --- */
+  if (!fine && !reduce) {
+    covers.forEach(function (c) {
+      c.addEventListener('touchstart', function (e) {
+        var t = e.touches[0], r = c.getBoundingClientRect();
+        c.style.setProperty('--gx', ((t.clientX - r.left) / r.width * 100).toFixed(1) + '%');
+        c.style.setProperty('--gy', ((t.clientY - r.top) / r.height * 100).toFixed(1) + '%');
+        c.classList.add('tap');
+        setTimeout(function () { c.classList.remove('tap'); }, 650);
+      }, { passive: true });
+    });
   }
 
   /* --- дальше только мышь: фонарь, наклон, магнитные кнопки --- */
@@ -886,3 +1005,5 @@ header, main, footer { position: relative; z-index: 1; }
   });
 })();
 </script>
+</body>
+</html>
