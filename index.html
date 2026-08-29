@@ -66,7 +66,9 @@ body {
   line-height: 1.65;
   margin: 0;
   -webkit-font-smoothing: antialiased;
-  overflow-x: hidden;
+  /* clip, а НЕ hidden: hidden делает body скролл-контейнером и ломает
+     position:sticky у шапки, clip просто обрезает вылезающее (подложку .top::before) */
+  overflow-x: clip;
 }
 
 ::selection { background: var(--sodium); color: #171005; }
@@ -100,10 +102,46 @@ a { color: inherit; }
 }
 
 /* ---------- верхняя планка ---------- */
+/* ---------- липкая шапка ---------- */
 .top {
   display: flex; align-items: center; justify-content: space-between;
   padding-block: 22px; gap: 16px;
+  position: sticky; top: 0; z-index: 40;
+  transition: padding-block .25s ease, transform .32s cubic-bezier(.2,.7,.3,1);
 }
+/* подложка шире контейнера — иначе на широких экранах текст «выныривает» по краям */
+.top::before {
+  content: ""; position: absolute; inset: 0 -50vw;
+  background: rgba(15, 20, 28, .82);
+  backdrop-filter: blur(14px) saturate(1.4);
+  -webkit-backdrop-filter: blur(14px) saturate(1.4);
+  border-bottom: 1px solid transparent;
+  opacity: 0; transition: opacity .25s ease, border-color .25s ease;
+  pointer-events: none;
+}
+.top > * { position: relative; z-index: 1; }
+.top.stuck { padding-block: 12px; }
+.top.stuck::before { opacity: 1; border-bottom-color: var(--line-hard); }
+.top.hidden { transform: translateY(-104%); }
+.top.stuck .brand-name { font-size: 18px; transition: font-size .25s ease; }
+
+/* ---------- навигация по разделам ---------- */
+.nav {
+  display: flex; gap: 4px; margin-left: auto; margin-right: 6px;
+}
+.nav a {
+  font-family: var(--mono); font-size: 12px; letter-spacing: .4px;
+  color: var(--dim); text-decoration: none; padding: 7px 11px; border-radius: 6px;
+  position: relative; transition: color .18s ease, background .18s ease;
+  white-space: nowrap;
+}
+.nav a:hover { color: var(--paper); background: var(--sodium-soft); }
+.nav a.current { color: var(--sodium); }
+.nav a.current::after {
+  content: ""; position: absolute; left: 11px; right: 11px; bottom: 3px;
+  height: 1px; background: var(--sodium);
+}
+@media (max-width: 1000px) { .nav { display: none; } }
 .brand { display: flex; align-items: baseline; gap: 12px; }
 .brand-name { font-family: var(--serif); font-weight: 640; font-size: 21px; letter-spacing: .2px; }
 .brand-sub { color: var(--dim); font-size: 13px; letter-spacing: .4px; }
@@ -409,7 +447,7 @@ header, main, footer { position: relative; z-index: 1; }
 
 /* ---------- мобильные эффекты ---------- */
 .progress { /* нить прогресса чтения */
-  position: fixed; top: 0; left: 0; width: 100%; height: 2px; z-index: 6;
+  position: fixed; top: 0; left: 0; width: 100%; height: 2px; z-index: 60;
   transform-origin: 0 0; transform: scaleX(0);
   background: linear-gradient(90deg, var(--sodium), var(--sodium-deep));
   pointer-events: none;
@@ -448,6 +486,7 @@ header, main, footer { position: relative; z-index: 1; }
   .hero-cta .btn { width: 100%; text-align: center; }
   .facts { flex-direction: column; gap: 10px; margin-top: 40px; }
   .brand-sub { display: none; }
+  .top.stuck { padding-block: 9px; }
   .case h3 { font-size: 23px; }
   .case-cover { min-height: 235px; }
   .mini-fan { right: 12px; bottom: 38px; }
@@ -485,6 +524,12 @@ header, main, footer { position: relative; z-index: 1; }
     <span class="brand-name">KozlovS</span>
     <span class="brand-sub">full-stack&nbsp;×&nbsp;AI</span>
   </div>
+  <nav class="nav" aria-label="Sections">
+    <a href="#cases" data-i18n="nav_work">Work</a>
+    <a href="#method" data-i18n="nav_method">Method</a>
+    <a href="#stack" data-i18n="nav_stack">Stack</a>
+    <a href="#contact" data-i18n="nav_contact">Contact</a>
+  </nav>
   <div class="top-right">
     <span class="onair mono"><i class="dot"></i><span data-i18n="online">available</span></span>
     <div class="lang-switch" role="group" aria-label="Language">
@@ -820,6 +865,10 @@ header, main, footer { position: relative; z-index: 1; }
    страница читается даже с выключенным JS. ---------- */
 var RU = {
   online: "на связи",
+  nav_work: "Кейсы",
+  nav_method: "Метод",
+  nav_stack: "Стек",
+  nav_contact: "Контакт",
   hero_eyebrow: "django · telegram-боты · платежи · ai-агенты",
   hero_l1: "Один разработчик.",
   hero_l2: 'Целый <span class="glow">продукт</span>.',
@@ -1010,6 +1059,68 @@ var META = {
   var reduce = matchMedia('(prefers-reduced-motion: reduce)').matches;
   var fine = matchMedia('(pointer: fine)').matches;
   var coarse = matchMedia('(pointer: coarse)').matches;
+
+  /* --- липкая шапка: сжимается, прячется вниз, возвращается вверх --- */
+  (function () {
+    var top = doc.querySelector('.top');
+    if (!top) return;
+    var last = window.scrollY, ticking = false;
+
+    function update() {
+      ticking = false;
+      var y = window.scrollY;
+      top.classList.toggle('stuck', y > 24);
+
+      // прячем только когда ушли достаточно далеко и правда едем вниз;
+      // порог в 6px убирает дрожание на тачпадах и инерционном скролле
+      var goingDown = y > last + 6;
+      var goingUp = y < last - 6;
+      if (goingDown && y > 320 && !doc.querySelector('.top:focus-within')) {
+        top.classList.add('hidden');
+      } else if (goingUp || y < 120) {
+        top.classList.remove('hidden');
+      }
+      last = y;
+    }
+
+
+
+    /* --- подсветка раздела, в котором сейчас читатель --- */
+    var links = [].slice.call(doc.querySelectorAll('.nav a'));
+    var sections = links.map(function (a) {
+      return doc.querySelector(a.getAttribute('href'));
+    });
+    function spy() {
+      var line = window.scrollY + innerHeight * 0.32;   // точка «взгляда» читателя
+      var active = -1;
+      sections.forEach(function (sec, i) {
+        if (sec && sec.offsetTop <= line) active = i;
+      });
+      links.forEach(function (a, i) { a.classList.toggle('current', i === active); });
+    }
+    // один обработчик на всё: раньше их было два с общим флагом ticking,
+    // и первый гасил флаг раньше, чем успевал отработать второй
+    addEventListener('scroll', function () {
+      if (!ticking) {
+        ticking = true;
+        requestAnimationFrame(function () { update(); spy(); });
+      }
+    }, { passive: true });
+    update();
+    spy();
+
+    // клик по разделу: плавно и с учётом высоты шапки
+    links.forEach(function (a) {
+      a.addEventListener('click', function (e) {
+        var target = doc.querySelector(a.getAttribute('href'));
+        if (!target) return;
+        e.preventDefault();
+        var offset = top.getBoundingClientRect().height + 12;
+        scrollTo({ top: target.offsetTop - offset, behavior: 'smooth' });
+        history.replaceState(null, '', a.getAttribute('href'));
+      });
+    });
+  })();
 
   /* --- появление блоков при скролле --- */
   var rvs = doc.querySelectorAll('.rv');
