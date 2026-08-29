@@ -1,14 +1,15 @@
 <!doctype html>
-<html lang="ru">
+<html lang="en">
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-<title>Портфолио KozlovS</title>
-<meta name="description" content="KozlovS — full-stack разработчик: сайты, Telegram-боты, платежи, AI-пайплайны. Живые продукты на боевых серверах, а не макеты.">
+<title>KozlovS — Full-stack developer</title>
+<meta name="description" content="Websites, Telegram bots, payments and AI pipelines. Live products on production servers, not mockups.">
 <meta name="theme-color" content="#0f141c">
-<meta property="og:title" content="Портфолио KozlovS">
-<meta property="og:description" content="Один разработчик — целый продукт: сайт, бот, платежи, сервер. Шесть живых кейсов.">
+<meta property="og:title" content="KozlovS — Full-stack developer">
+<meta property="og:description" content="One developer, a whole product: website, bot, payments, server. Six live cases.">
 <meta property="og:type" content="website">
+<meta property="og:locale" content="en_US">
 <meta property="og:url" content="https://morphius-ui.github.io/">
 <script>document.documentElement.classList.add('js')</script>
 <style>
@@ -458,6 +459,21 @@ header, main, footer { position: relative; z-index: 1; }
   .contact .hero-cta .btn { overflow: hidden; text-overflow: ellipsis; }
   footer { flex-direction: column; padding-bottom: 96px; } /* место под pill-cta */
 }
+
+/* ---------- переключатель языка ---------- */
+.lang-switch {
+  display: inline-flex; border: 1px solid var(--line-hard); border-radius: 6px;
+  overflow: hidden; background: var(--night-raise);
+}
+.lang-btn {
+  font-family: var(--mono); font-size: 11.5px; letter-spacing: .6px;
+  padding: 7px 11px; border: 0; background: none; color: var(--dim);
+  cursor: pointer; transition: color .18s ease, background .18s ease;
+}
+.lang-btn:hover { color: var(--paper); }
+.lang-btn.is-on { background: var(--sodium); color: #171005; font-weight: 600; }
+.lang-btn + .lang-btn { border-left: 1px solid var(--line-hard); }
+@media (max-width: 560px) { .lang-btn { padding: 6px 9px; font-size: 11px; } }
 </style>
 </head>
 <body>
@@ -470,56 +486,61 @@ header, main, footer { position: relative; z-index: 1; }
     <span class="brand-sub">full-stack&nbsp;×&nbsp;AI</span>
   </div>
   <div class="top-right">
-    <span class="onair mono"><i class="dot"></i>на связи</span>
+    <span class="onair mono"><i class="dot"></i><span data-i18n="online">available</span></span>
+    <div class="lang-switch" role="group" aria-label="Language">
+      <button type="button" class="lang-btn is-on" data-lang="en">EN</button>
+      <button type="button" class="lang-btn" data-lang="ru">RU</button>
+    </div>
     <a class="btn btn-ghost btn-sm" href="https://t.me/youarethecar">Telegram</a>
   </div>
 </header>
 
 <main class="container">
 
-  <!-- ================= ХИРО ================= -->
+  <!-- ================= HERO ================= -->
   <section class="hero">
-    <p class="eyebrow mono rv">django · telegram-боты · платежи · ai-агенты</p>
+    <p class="eyebrow mono rv" data-i18n="hero_eyebrow">django · telegram bots · payments · ai agents</p>
     <h1 class="rv">
-      <span class="hl-mask"><span class="hl">Один разработчик.</span></span>
-      <span class="hl-mask"><span class="hl hl-2">Целый <span class="glow">продукт</span>.</span></span>
+      <span class="hl-mask"><span class="hl" data-i18n="hero_l1">One developer.</span></span>
+      <span class="hl-mask"><span class="hl hl-2" data-i18n="hero_l2">A whole <span class="glow">product</span>.</span></span>
     </h1>
-    <p class="lede rv">Сайт, Telegram-бот, приём платежей, боевой сервер — собираю и запускаю
-      в одиночку. Рутину тянут <b>AI-агенты</b>, архитектура и ответственность — мои.
-      Ниже — <b>живые проекты</b>, а не макеты из Behance.</p>
+    <p class="lede rv" data-i18n="hero_lede">Website, Telegram bot, payments, production server — I build and ship
+      it alone. AI agents handle the grind; the architecture and the responsibility are mine.
+      Below are <b>live products</b>, not mockups.</p>
     <div class="hero-cta rv">
-      <a class="btn btn-solid" href="https://t.me/youarethecar">Обсудить задачу</a>
-      <a class="btn btn-ghost" href="#cases">Смотреть кейсы ↓</a>
+      <a class="btn btn-solid" href="https://t.me/youarethecar" data-i18n="cta_discuss">Discuss your project</a>
+      <a class="btn btn-ghost" href="#cases" data-i18n="cta_cases">See the work ↓</a>
     </div>
     <ul class="facts mono rv">
-      <li><i class="dot"></i>живые продукты на боевых серверах — не пет-проекты</li>
-      <li><i class="dot"></i>Stripe-платежи в проде</li>
-      <li><i class="dot amber"></i>боты отвечают 24/7 — даже когда я сплю</li>
+      <li><i class="dot"></i><span data-i18n="fact_1">live products on production servers — not pet projects</span></li>
+      <li><i class="dot"></i><span data-i18n="fact_2">Stripe payments running in production</span></li>
+      <li><i class="dot amber"></i><span data-i18n="fact_3">bots answer 24/7 — even while I sleep</span></li>
     </ul>
   </section>
 
-  <!-- ================= КЕЙСЫ ================= -->
+  <!-- ================= CASES ================= -->
   <section id="cases">
     <div class="sec-head rv">
-      <p class="eyebrow mono">кейсы</p>
-      <h2>Живые проекты</h2>
-      <p class="sec-note">Каждый кейс — работающая система с настоящими пользователями,
-        данными и деньгами. Цифры не округлены для красоты.</p>
+      <p class="eyebrow mono" data-i18n="cases_eyebrow">selected work</p>
+      <h2 data-i18n="cases_title">Live products</h2>
+      <p class="sec-note" data-i18n="cases_note">Every case is a working system with real users, real data
+        and real money. The numbers are not rounded to look better.</p>
     </div>
 
-    <!-- 1. Мафия Орландо -->
+    <!-- 1. Mafia Orlando -->
     <article class="case rv">
       <div class="case-body">
-        <p class="case-status mono"><i class="dot"></i>в проде · сервер в США · Stripe</p>
-        <h3>Платформа клуба «Мафия» в Орландо</h3>
-        <p class="case-text">Офлайн-клуб, для которого я собрал всё цифровое: лендинг, покупку мест,
-          Telegram-бот и панель ведущего. Внутри — <b>полноценный игровой движок</b>: роли вплоть до
-          Консильери и Капо, ночные ходы, голосования, тюрьма. Гость платит картой без регистрации —
-          аккаунт создаёт вебхук Stripe. Каждая строка интерфейса живёт на двух языках.</p>
+        <p class="case-status mono"><i class="dot"></i><span data-i18n="case1_status">in production · US server · Stripe</span></p>
+        <h3 data-i18n="case1_title">Social club platform in Orlando</h3>
+        <p class="case-text" data-i18n="case1_text">An offline Mafia game club I built the entire digital side for:
+          landing page, seat checkout, Telegram bot and a host control panel. Inside is a
+          <b>full game engine</b>: roles down to Consigliere and Capo, night moves, votes, jail.
+          Guests pay by card with no signup — a Stripe webhook creates the account.
+          Every line of the interface lives in two languages.</p>
         <p class="case-visit"><a class="case-link" href="https://orlando.mafiagame.us" target="_blank" rel="noopener">orlando.mafiagame.us&nbsp;↗</a></p>
         <ul class="chips">
-          <li>Django</li><li>pyTelegramBotAPI</li><li>Stripe + вебхуки</li>
-          <li>i18n RU/EN</li><li>VPS + gunicorn</li>
+          <li>Django</li><li>pyTelegramBotAPI</li><li>Stripe + webhooks</li>
+          <li>i18n EN/RU</li><li>VPS + gunicorn</li>
         </ul>
       </div>
       <div class="case-cover v-mafia v-shot" aria-hidden="true">
@@ -532,23 +553,23 @@ header, main, footer { position: relative; z-index: 1; }
           <div class="mcard"><span class="msuit">♦</span></div>
           <div class="mcard"><span class="msuit">♣</span></div>
         </div>
-        <span class="vtag mono">игры идут · RU/EN</span>
+        <span class="vtag mono" data-i18n="case1_tag">games running · EN/RU</span>
       </div>
     </article>
 
     <!-- 2. RentHub -->
     <article class="case rv">
       <div class="case-body">
-        <p class="case-status mono"><i class="dot"></i>в проде · renthub.site</p>
-        <h3>RentHub — маркетплейс аренды с эскроу</h3>
-        <p class="case-text">Аренда чего угодно, где деньги ходят по-взрослому: <b>эскроу-кошелёк</b>,
-          заморозка залога, споры с арбитражем, премодерация объявлений. Поиск понимает запрос
-          «аппарат чтобы ездить типа самоката», гео знает <b>196&nbsp;485 населённых пунктов</b>,
-          рекомендации считаются на векторах. Каталог обкатан на тысяче объявлений.</p>
+        <p class="case-status mono"><i class="dot"></i><span data-i18n="case2_status">in production · renthub.site</span></p>
+        <h3 data-i18n="case2_title">RentHub — rental marketplace with escrow</h3>
+        <p class="case-text" data-i18n="case2_text">Peer-to-peer rentals where money moves like it should:
+          <b>escrow wallet</b>, held deposits, disputes with arbitration, listing pre-moderation.
+          Search understands conversational queries, geo covers <b>196,485 populated places</b>,
+          recommendations run on vectors. The catalog was load-tested on a thousand listings.</p>
         <p class="case-visit"><a class="case-link" href="https://renthub.site" target="_blank" rel="noopener">renthub.site&nbsp;↗</a></p>
         <ul class="chips">
-          <li>Django</li><li>Яндекс.Карты</li><li>эскроу-кошелёк</li>
-          <li>векторный поиск</li><li>E2E-тесты</li>
+          <li>Django</li><li>maps API</li><li data-i18n="chip_escrow">escrow wallet</li>
+          <li data-i18n="chip_vector">vector search</li><li>E2E tests</li>
         </ul>
       </div>
       <div class="case-cover v-shot" aria-hidden="true">
@@ -556,57 +577,57 @@ header, main, footer { position: relative; z-index: 1; }
           <div class="rbar"><i></i><i></i><i></i><span class="mono">renthub.site</span></div>
           <img class="shot-img" src="img/renthub.webp" alt="" loading="lazy" width="1920" height="1200">
         </div>
-        <span class="vtag mono">гео: <span class="cnt" data-n="196485">196 485</span> нас. пунктов</span>
+        <span class="vtag mono"><span data-i18n="case2_tag_pre">geo:</span> <span class="cnt" data-n="196485">196,485</span> <span data-i18n="case2_tag_post">places</span></span>
       </div>
     </article>
 
-    <!-- 3. Автопилот -->
+    <!-- 3. Autopilot -->
     <article class="case rv">
       <div class="case-body">
-        <p class="case-status mono"><i class="dot amber"></i>работает ночами · автономные агенты</p>
-        <h3>Автопилот — AI развивает продукт сам</h3>
-        <p class="case-text">Мой ответ на вопрос «что AI-агенты умеют на самом деле». Telegram-бот
-          запускает автономные сессии Claude над кодом RentHub: <b>ночью — серия итераций</b>
-          в отдельной ветке с жёстким бюджетом, утром я читаю диф и деплою одной кнопкой.
-          У агента память проекта, шесть режимов от разведки до багханта и песочница, где он
-          проверяет сайт настоящим браузером. Итерация — ~15 минут; агент находил реальные баги
-          раньше меня.</p>
+        <p class="case-status mono"><i class="dot amber"></i><span data-i18n="case3_status">runs at night · autonomous agents</span></p>
+        <h3 data-i18n="case3_title">Autopilot — AI that ships product on its own</h3>
+        <p class="case-text" data-i18n="case3_text">My answer to what AI agents can actually do. A Telegram bot
+          launches autonomous Claude sessions over the RentHub codebase: <b>a series of iterations
+          overnight</b> on a separate branch under a hard budget; in the morning I read the diff and
+          deploy with one button. The agent keeps project memory, has six modes from recon to bug
+          hunting, and a sandbox where it drives the site in a real browser. One iteration takes
+          ~15 minutes — and it found real bugs before I did.</p>
         <ul class="chips">
-          <li>Claude Code · headless</li><li>git-ветки</li><li>Playwright</li>
-          <li>бюджет-контроль</li><li>память проекта</li>
+          <li>Claude Code · headless</li><li data-i18n="chip_branches">git branches</li><li>Playwright</li>
+          <li data-i18n="chip_budget">budget control</li><li data-i18n="chip_memory">project memory</li>
         </ul>
       </div>
       <div class="case-cover v-auto" aria-hidden="true">
         <div class="term">
-          <div class="term-head">autopilot · ночная серия</div>
-          <div class="tline"><span class="tt">23:07</span>серия запущена · бюджет ночи ok</div>
-          <div class="tline"><span class="tt">23:41</span>итерация 7 · режим <span class="ta">bughunt</span></div>
-          <div class="tline"><span class="tt">23:58</span>найден баг: pluralize с 3 арг.</div>
-          <div class="tline"><span class="tt">00:12</span>фикс готов · тесты <span class="tg">18/18 ✓</span></div>
-          <div class="tline"><span class="tt">00:13</span>push → ветка autopilot</div>
-          <div class="tline"><span class="tt">00:14</span>итерация 8 · режим critic<span class="cursor"></span></div>
+          <div class="term-head" data-i18n="term_head">autopilot · night run</div>
+          <div class="tline"><span class="tt">23:07</span><span data-i18n="term_1">series started · night budget ok</span></div>
+          <div class="tline"><span class="tt">23:41</span><span data-i18n="term_2">iteration 7 · mode</span> <span class="ta">bughunt</span></div>
+          <div class="tline"><span class="tt">23:58</span><span data-i18n="term_3">bug found: pluralize with 3 args</span></div>
+          <div class="tline"><span class="tt">00:12</span><span data-i18n="term_4">fix ready · tests</span> <span class="tg">18/18 ✓</span></div>
+          <div class="tline"><span class="tt">00:13</span><span data-i18n="term_5">push → autopilot branch</span></div>
+          <div class="tline"><span class="tt">00:14</span><span data-i18n="term_6">iteration 8 · mode critic</span><span class="cursor"></span></div>
         </div>
-        <span class="vtag mono">утром — диф и деплой одной кнопкой</span>
+        <span class="vtag mono" data-i18n="case3_tag">morning: read diff, deploy in one tap</span>
       </div>
     </article>
 
-    <!-- 4. Настя -->
+    <!-- 4. Voice assistant -->
     <article class="case rv">
       <div class="case-body">
-        <p class="case-status mono"><i class="dot amber"></i>локально · cpu-only</p>
-        <h3>Настя — голосовой ассистент без GPU</h3>
-        <p class="case-text">Ассистент, который целиком живёт на ноутбуке: wake-word, Silero VAD,
-          распознавание faster-whisper, синтез Supertonic — <b>всё локально, без видеокарты</b>;
-          думает Mistral по стриминговому REST. Держит постоянную bash-консоль (cd и переменные
-          не слетают между командами), запускает приложения, отвечает голосом. Модульный конвейер,
-          каждый блок заменяется независимо.</p>
+        <p class="case-status mono"><i class="dot amber"></i><span data-i18n="case4_status">local · cpu-only</span></p>
+        <h3 data-i18n="case4_title">Nastya — a voice assistant with no GPU</h3>
+        <p class="case-text" data-i18n="case4_text">An assistant that lives entirely on a laptop: wake word,
+          Silero VAD, faster-whisper recognition, Supertonic synthesis — <b>all local, no graphics
+          card</b>; it thinks through Mistral over streaming REST. It holds a persistent bash session
+          (cd and variables survive between commands), launches apps and answers out loud.
+          Modular pipeline: every block swaps out independently.</p>
         <ul class="chips">
           <li>faster-whisper</li><li>Silero VAD</li><li>Supertonic TTS</li>
           <li>Mistral API</li><li>Python 3.11</li>
         </ul>
       </div>
       <div class="case-cover v-voice" aria-hidden="true">
-        <p class="vq mono">«настя, открой браузер»</p>
+        <p class="vq mono" data-i18n="case4_quote">“nastya, open the browser”</p>
         <div class="wave">
           <i style="--i:0;--h:26%"></i><i style="--i:1;--h:44%"></i><i style="--i:2;--h:62%"></i>
           <i style="--i:3;--h:88%"></i><i style="--i:4;--h:54%"></i><i style="--i:5;--h:72%"></i>
@@ -616,18 +637,19 @@ header, main, footer { position: relative; z-index: 1; }
           <i style="--i:15;--h:34%"></i><i style="--i:16;--h:56%"></i><i style="--i:17;--h:24%"></i>
         </div>
         <p class="vpipe">mic → vad → whisper → mistral → tts</p>
-        <span class="vtag mono">обычный ноутбук · без gpu</span>
+        <span class="vtag mono" data-i18n="case4_tag">ordinary laptop · no gpu</span>
       </div>
     </article>
 
     <!-- 5. VTuber -->
     <article class="case rv">
       <div class="case-body">
-        <p class="case-status mono"><i class="dot amber"></i>прототип · браузер</p>
-        <h3>VTuber — 3D-аватар для стримов</h3>
-        <p class="case-text">Аватар без капли нативного кода: MediaPipe FaceLandmarker читает
-          <b>мимику с веб-камеры</b>, three-vrm двигает VRM-модель, прозрачный канвас забирается
-          прямо в OBS. Браузер — единственная зависимость: открыл вкладку — аватар ожил.</p>
+        <p class="case-status mono"><i class="dot amber"></i><span data-i18n="case5_status">prototype · browser</span></p>
+        <h3 data-i18n="case5_title">VTuber — 3D avatar for streaming</h3>
+        <p class="case-text" data-i18n="case5_text">An avatar without a line of native code: MediaPipe
+          FaceLandmarker reads <b>facial expressions from the webcam</b>, three-vrm drives the VRM
+          model, and a transparent canvas feeds straight into OBS. The browser is the only
+          dependency — open a tab and the avatar is alive.</p>
         <ul class="chips">
           <li>three.js</li><li>three-vrm</li><li>MediaPipe</li><li>WebGL</li><li>OBS</li>
         </ul>
@@ -660,137 +682,327 @@ header, main, footer { position: relative; z-index: 1; }
     <!-- 6. American Drive Tech -->
     <article class="case rv">
       <div class="case-body">
-        <p class="case-status mono"><i class="dot"></i>клиентский проект · b2b · США</p>
-        <h3>База знаний для авто-локсмитов</h3>
-        <p class="case-text">Заказной B2B-справочник по иммобилайзерам: <b>61 марка, 1660 моделей,
-          76 пошаговых гайдов</b> по IMMO, AKL и EEPROM. Парсеры сырых текстовых баз, каскадный
-          подбор «марка → модель → год», авторизация — и собственная дизайн-система «тёплая
-          мастерская»: бумага, уголь, латунь. Ни одного дефолтного пикселя.</p>
+        <p class="case-status mono"><i class="dot"></i><span data-i18n="case6_status">client work · b2b · USA</span></p>
+        <h3 data-i18n="case6_title">Knowledge base for automotive locksmiths</h3>
+        <p class="case-text" data-i18n="case6_text">A commissioned B2B reference for immobilizers:
+          <b>61 makes, 1,660 models, 76 step-by-step guides</b> covering IMMO, AKL and EEPROM.
+          Parsers for raw text databases, cascading make → model → year selection, authentication —
+          and a custom design system built around a warm workshop: paper, charcoal, brass.
+          Not a single default pixel.</p>
         <ul class="chips">
-          <li>Django</li><li>парсеры данных</li><li>своя дизайн-система</li><li>авторизация</li>
+          <li>Django</li><li data-i18n="chip_parsers">data parsers</li><li data-i18n="chip_ds">custom design system</li><li data-i18n="chip_auth">authentication</li>
         </ul>
       </div>
       <div class="case-cover v-adt" aria-hidden="true">
         <div class="spec">
           <div class="spec-head"><span>BMW E8x · CAS3</span><span class="mono">AKL</span></div>
-          <div class="srow"><span>Система</span><b>CAS3 / CAS3+</b></div>
-          <div class="srow"><span>Транспондер</span><b>PCF7945</b></div>
-          <div class="srow"><span>Сложность</span><b>Medium · 15–30 мин</b></div>
-          <div class="srow"><span>Гайдов</span><b>4 walkthrough</b></div>
+          <div class="srow"><span data-i18n="spec_system">System</span><b>CAS3 / CAS3+</b></div>
+          <div class="srow"><span data-i18n="spec_trans">Transponder</span><b>PCF7945</b></div>
+          <div class="srow"><span data-i18n="spec_diff">Difficulty</span><b data-i18n="spec_diff_val">Medium · 15–30 min</b></div>
+          <div class="srow"><span data-i18n="spec_guides">Guides</span><b data-i18n="spec_guides_val">4 walkthroughs</b></div>
         </div>
-        <span class="vtag mono"><span class="cnt" data-n="61">61</span> марка · <span class="cnt" data-n="1660">1660</span> моделей · <span class="cnt" data-n="76">76</span> гайдов</span>
+        <span class="vtag mono"><span class="cnt" data-n="61">61</span> <span data-i18n="tag_makes">makes</span> · <span class="cnt" data-n="1660">1,660</span> <span data-i18n="tag_models">models</span> · <span class="cnt" data-n="76">76</span> <span data-i18n="tag_guides">guides</span></span>
       </div>
     </article>
   </section>
 
-  <!-- ================= ЛАБОРАТОРИЯ ================= -->
+  <!-- ================= LAB ================= -->
   <section id="lab">
     <div class="sec-head rv">
-      <p class="eyebrow mono">лаборатория</p>
-      <h2>Что на верстаке</h2>
+      <p class="eyebrow mono" data-i18n="lab_eyebrow">lab</p>
+      <h2 data-i18n="lab_title">On the workbench</h2>
     </div>
     <div class="lab rv">
       <div class="lab-row">
         <span class="mono">research</span>
-        <p><b>Крипто-бот на FreqAI + LightGBM</b> — фичи, бэктесты, дисциплина dry-run.
-          Сейчас в процессе тестирования на живых рыночных данных.</p>
+        <p data-i18n="lab_1"><b>Crypto bot on FreqAI + LightGBM</b> — feature engineering, backtests,
+          strict dry-run discipline. Currently under test against live market data.</p>
       </div>
       <div class="lab-row">
-        <span class="mono">проектирую</span>
-        <p><b>SaaS-конструктор Telegram-магазинов</b> — «Shopify для продавцов в Telegram»:
-          магазин за вечер, комиссия с оборота, крипто-платежи.</p>
+        <span class="mono" data-i18n="lab_designing">designing</span>
+        <p data-i18n="lab_2"><b>SaaS builder for Telegram storefronts</b> — “Shopify for Telegram sellers”:
+          a store in one evening, revenue-share pricing, crypto payments.</p>
       </div>
     </div>
   </section>
 
-  <!-- ================= МЕТОД ================= -->
+  <!-- ================= METHOD ================= -->
   <section id="method">
     <div class="sec-head rv">
-      <p class="eyebrow mono">метод</p>
-      <h2>Как я работаю</h2>
+      <p class="eyebrow mono" data-i18n="method_eyebrow">method</p>
+      <h2 data-i18n="method_title">How I work</h2>
     </div>
     <div class="method-grid">
       <div class="mcell rv">
-        <p class="mono">01 · рычаг</p>
-        <h3>AI — скорость, не качество</h3>
-        <p>Черновики пишут агенты — архитектура, ревью и ответственность мои. Поэтому один
-          закрываю объём, на который обычно нужна команда.</p>
+        <p class="mono" data-i18n="m1_label">01 · leverage</p>
+        <h3 data-i18n="m1_title">AI is speed, not quality</h3>
+        <p data-i18n="m1_text">Agents write the drafts — architecture, review and accountability stay
+          with me. That is why one person covers the scope a team usually needs.</p>
       </div>
       <div class="mcell rv">
-        <p class="mono">02 · до конца</p>
-        <h3>Продукт, а не репозиторий</h3>
-        <p>Результат — не код в архиве, а работающий сервис: сервер, домен, платежи,
-          E2E-проверки перед каждым релизом.</p>
+        <p class="mono" data-i18n="m2_label">02 · all the way</p>
+        <h3 data-i18n="m2_title">A product, not a repository</h3>
+        <p data-i18n="m2_text">You get a running service, not code in an archive: server, domain,
+          payments, and E2E checks before every release.</p>
       </div>
       <div class="mcell rv">
-        <p class="mono">03 · ночь</p>
-        <h3>Продукты не спят</h3>
-        <p>Боты отвечают в четыре утра, вебхуки принимают оплату без меня, автопилот
-          коммитит к рассвету. Проверено продакшеном.</p>
+        <p class="mono" data-i18n="m3_label">03 · night shift</p>
+        <h3 data-i18n="m3_title">Products don't sleep</h3>
+        <p data-i18n="m3_text">Bots answer at four in the morning, webhooks take payments without me,
+          the autopilot commits by sunrise. Proven in production.</p>
       </div>
     </div>
   </section>
 
-  <!-- ================= СТЕК ================= -->
+  <!-- ================= STACK ================= -->
   <section id="stack">
     <div class="sec-head rv">
-      <p class="eyebrow mono">инструменты</p>
-      <h2>Стек</h2>
+      <p class="eyebrow mono" data-i18n="stack_eyebrow">tools</p>
+      <h2 data-i18n="stack_title">Stack</h2>
     </div>
     <div class="rv">
       <div class="stack-row">
-        <span class="mono">бэкенд</span>
-        <ul class="chips"><li>Python 3.11</li><li>Django 5</li><li>ORM + миграции</li><li>REST</li></ul>
+        <span class="mono" data-i18n="st_backend">backend</span>
+        <ul class="chips"><li>Python 3.11</li><li>Django 5</li><li data-i18n="chip_orm">ORM + migrations</li><li>REST</li></ul>
       </div>
       <div class="stack-row">
-        <span class="mono">боты</span>
-        <ul class="chips"><li>pyTelegramBotAPI</li><li>aiogram</li><li>вебхуки и поллинг</li><li>платёжные флоу</li></ul>
+        <span class="mono" data-i18n="st_bots">bots</span>
+        <ul class="chips"><li>pyTelegramBotAPI</li><li>aiogram</li><li data-i18n="chip_webhooks">webhooks &amp; polling</li><li data-i18n="chip_payflow">payment flows</li></ul>
       </div>
       <div class="stack-row">
-        <span class="mono">ai-инженерия</span>
-        <ul class="chips"><li>Claude Code / агенты</li><li>Whisper</li><li>Silero</li><li>Mistral API</li><li>MediaPipe</li><li>LightGBM</li></ul>
+        <span class="mono" data-i18n="st_ai">ai engineering</span>
+        <ul class="chips"><li data-i18n="chip_claude">Claude Code / agents</li><li>Whisper</li><li>Silero</li><li>Mistral API</li><li>MediaPipe</li><li>LightGBM</li></ul>
       </div>
       <div class="stack-row">
-        <span class="mono">платежи</span>
-        <ul class="chips"><li>Stripe Checkout</li><li>вебхуки</li><li>эскроу-логика</li></ul>
+        <span class="mono" data-i18n="st_pay">payments</span>
+        <ul class="chips"><li>Stripe Checkout</li><li data-i18n="chip_wh2">webhooks</li><li data-i18n="chip_escrow2">escrow logic</li></ul>
       </div>
       <div class="stack-row">
-        <span class="mono">фронт</span>
-        <ul class="chips"><li>адаптивная вёрстка</li><li>vanilla JS</li><li>three.js</li><li>дизайн-системы</li></ul>
+        <span class="mono" data-i18n="st_front">frontend</span>
+        <ul class="chips"><li data-i18n="chip_resp">responsive layout</li><li>vanilla JS</li><li>three.js</li><li data-i18n="chip_ds2">design systems</li></ul>
       </div>
       <div class="stack-row">
-        <span class="mono">инфра</span>
-        <ul class="chips"><li>Linux VPS</li><li>gunicorn</li><li>git / GitHub</li><li>SSH-деплой</li><li>Playwright-аудиты</li></ul>
+        <span class="mono" data-i18n="st_infra">infrastructure</span>
+        <ul class="chips"><li>Linux VPS</li><li>gunicorn</li><li>git / GitHub</li><li data-i18n="chip_ssh">SSH deploys</li><li data-i18n="chip_pw">Playwright audits</li></ul>
       </div>
     </div>
   </section>
 
-  <!-- ================= КОНТАКТ ================= -->
+  <!-- ================= CONTACT ================= -->
   <section id="contact">
     <div class="contact rv">
-      <p class="eyebrow mono">контакт</p>
-      <h2>Расскажите, что собрать.</h2>
-      <p class="lede">Опишите задачу как умеете — я переведу её в план, смету и работающий
-        продукт. Отвечаю быстро, часовой пояс московский.</p>
+      <p class="eyebrow mono" data-i18n="contact_eyebrow">contact</p>
+      <h2 data-i18n="contact_title">Tell me what to build.</h2>
+      <p class="lede" data-i18n="contact_lede">Describe the task however you can — I'll turn it into a plan,
+        an estimate and a working product. I reply fast and my hours overlap the US morning.</p>
       <ul class="services">
-        <li>сайт / веб-сервис под ключ</li>
-        <li>telegram-бот для бизнеса</li>
-        <li>ai-фича в ваш продукт</li>
-        <li>панель управления / админка</li>
+        <li data-i18n="srv_1">website / web service, end to end</li>
+        <li data-i18n="srv_2">Telegram bot for your business</li>
+        <li data-i18n="srv_3">an AI feature inside your product</li>
+        <li data-i18n="srv_4">admin panel / internal dashboard</li>
       </ul>
       <div class="hero-cta">
-        <a class="btn btn-solid" href="https://t.me/youarethecar">Написать в Telegram</a>
+        <a class="btn btn-solid" href="https://t.me/youarethecar" data-i18n="cta_write">Message me on Telegram</a>
         <a class="btn btn-ghost" href="mailto:sashaprogg001@gmail.com">sashaprogg001@gmail.com</a>
       </div>
     </div>
   </section>
 </main>
 
-<a class="pill-cta" href="https://t.me/youarethecar">Написать в Telegram</a>
+<a class="pill-cta" href="https://t.me/youarethecar" data-i18n="cta_write">Message me on Telegram</a>
 
 <footer class="container">
-  <span>© 2026 KozlovS — собрано руками и AI-агентами, без конструкторов</span>
+  <span data-i18n="footer">© 2026 KozlovS — built by hand and by AI agents, no page builders</span>
 </footer>
+
+<script>
+/* ---------- Русская версия. Английский лежит прямо в HTML, поэтому
+   страница читается даже с выключенным JS. ---------- */
+var RU = {
+  online: "на связи",
+  hero_eyebrow: "django · telegram-боты · платежи · ai-агенты",
+  hero_l1: "Один разработчик.",
+  hero_l2: 'Целый <span class="glow">продукт</span>.',
+  hero_lede: "Сайт, Telegram-бот, приём платежей, боевой сервер — собираю и запускаю в одиночку. " +
+    "Рутину тянут <b>AI-агенты</b>, архитектура и ответственность — мои. " +
+    "Ниже — <b>живые проекты</b>, а не макеты.",
+  cta_discuss: "Обсудить задачу",
+  cta_cases: "Смотреть кейсы ↓",
+  fact_1: "живые продукты на боевых серверах — не пет-проекты",
+  fact_2: "Stripe-платежи в проде",
+  fact_3: "боты отвечают 24/7 — даже когда я сплю",
+
+  cases_eyebrow: "кейсы",
+  cases_title: "Живые проекты",
+  cases_note: "Каждый кейс — работающая система с настоящими пользователями, данными и деньгами. " +
+    "Цифры не округлены для красоты.",
+
+  case1_status: "в проде · сервер в США · Stripe",
+  case1_title: "Платформа клуба «Мафия» в Орландо",
+  case1_text: "Офлайн-клуб, для которого я собрал всё цифровое: лендинг, покупку мест, Telegram-бот " +
+    "и панель ведущего. Внутри — <b>полноценный игровой движок</b>: роли вплоть до Консильери и Капо, " +
+    "ночные ходы, голосования, тюрьма. Гость платит картой без регистрации — аккаунт создаёт вебхук " +
+    "Stripe. Каждая строка интерфейса живёт на двух языках.",
+  case1_tag: "игры идут · RU/EN",
+
+  case2_status: "в проде · renthub.site",
+  case2_title: "RentHub — маркетплейс аренды с эскроу",
+  case2_text: "Аренда чего угодно, где деньги ходят по-взрослому: <b>эскроу-кошелёк</b>, заморозка " +
+    "залога, споры с арбитражем, премодерация объявлений. Поиск понимает запрос «аппарат чтобы ездить " +
+    "типа самоката», гео знает <b>196 485 населённых пунктов</b>, рекомендации считаются на векторах. " +
+    "Каталог обкатан на тысяче объявлений.",
+  case2_tag_pre: "гео:",
+  case2_tag_post: "нас. пунктов",
+  chip_escrow: "эскроу-кошелёк",
+  chip_vector: "векторный поиск",
+
+  case3_status: "работает ночами · автономные агенты",
+  case3_title: "Автопилот — AI развивает продукт сам",
+  case3_text: "Мой ответ на вопрос «что AI-агенты умеют на самом деле». Telegram-бот запускает " +
+    "автономные сессии Claude над кодом RentHub: <b>ночью — серия итераций</b> в отдельной ветке " +
+    "с жёстким бюджетом, утром я читаю диф и деплою одной кнопкой. У агента память проекта, шесть " +
+    "режимов от разведки до багханта и песочница, где он проверяет сайт настоящим браузером. " +
+    "Итерация — ~15 минут; агент находил реальные баги раньше меня.",
+  case3_tag: "утром — диф и деплой одной кнопкой",
+  chip_branches: "git-ветки",
+  chip_budget: "бюджет-контроль",
+  chip_memory: "память проекта",
+  term_head: "autopilot · ночная серия",
+  term_1: "серия запущена · бюджет ночи ok",
+  term_2: "итерация 7 · режим",
+  term_3: "найден баг: pluralize с 3 арг.",
+  term_4: "фикс готов · тесты",
+  term_5: "push → ветка autopilot",
+  term_6: "итерация 8 · режим critic",
+
+  case4_status: "локально · cpu-only",
+  case4_title: "Настя — голосовой ассистент без GPU",
+  case4_text: "Ассистент, который целиком живёт на ноутбуке: wake-word, Silero VAD, распознавание " +
+    "faster-whisper, синтез Supertonic — <b>всё локально, без видеокарты</b>; думает Mistral " +
+    "по стриминговому REST. Держит постоянную bash-консоль (cd и переменные не слетают между " +
+    "командами), запускает приложения, отвечает голосом. Модульный конвейер, каждый блок " +
+    "заменяется независимо.",
+  case4_quote: "«настя, открой браузер»",
+  case4_tag: "обычный ноутбук · без gpu",
+
+  case5_status: "прототип · браузер",
+  case5_title: "VTuber — 3D-аватар для стримов",
+  case5_text: "Аватар без капли нативного кода: MediaPipe FaceLandmarker читает <b>мимику " +
+    "с веб-камеры</b>, three-vrm двигает VRM-модель, прозрачный канвас забирается прямо в OBS. " +
+    "Браузер — единственная зависимость: открыл вкладку — аватар ожил.",
+
+  case6_status: "клиентский проект · b2b · США",
+  case6_title: "База знаний для авто-локсмитов",
+  case6_text: "Заказной B2B-справочник по иммобилайзерам: <b>61 марка, 1660 моделей, 76 пошаговых " +
+    "гайдов</b> по IMMO, AKL и EEPROM. Парсеры сырых текстовых баз, каскадный подбор «марка → модель " +
+    "→ год», авторизация — и собственная дизайн-система «тёплая мастерская»: бумага, уголь, латунь. " +
+    "Ни одного дефолтного пикселя.",
+  chip_parsers: "парсеры данных",
+  chip_ds: "своя дизайн-система",
+  chip_auth: "авторизация",
+  spec_system: "Система",
+  spec_trans: "Транспондер",
+  spec_diff: "Сложность",
+  spec_diff_val: "Medium · 15–30 мин",
+  spec_guides: "Гайдов",
+  spec_guides_val: "4 walkthrough",
+  tag_makes: "марка",
+  tag_models: "моделей",
+  tag_guides: "гайдов",
+
+  lab_eyebrow: "лаборатория",
+  lab_title: "Что на верстаке",
+  lab_designing: "проектирую",
+  lab_1: "<b>Крипто-бот на FreqAI + LightGBM</b> — фичи, бэктесты, дисциплина dry-run. " +
+    "Сейчас в процессе тестирования на живых рыночных данных.",
+  lab_2: "<b>SaaS-конструктор Telegram-магазинов</b> — «Shopify для продавцов в Telegram»: " +
+    "магазин за вечер, комиссия с оборота, крипто-платежи.",
+
+  method_eyebrow: "метод",
+  method_title: "Как я работаю",
+  m1_label: "01 · рычаг",
+  m1_title: "AI — скорость, не качество",
+  m1_text: "Черновики пишут агенты — архитектура, ревью и ответственность мои. " +
+    "Поэтому один закрываю объём, на который обычно нужна команда.",
+  m2_label: "02 · до конца",
+  m2_title: "Продукт, а не репозиторий",
+  m2_text: "Результат — не код в архиве, а работающий сервис: сервер, домен, платежи, " +
+    "E2E-проверки перед каждым релизом.",
+  m3_label: "03 · ночь",
+  m3_title: "Продукты не спят",
+  m3_text: "Боты отвечают в четыре утра, вебхуки принимают оплату без меня, автопилот " +
+    "коммитит к рассвету. Проверено продакшеном.",
+
+  stack_eyebrow: "инструменты",
+  stack_title: "Стек",
+  st_backend: "бэкенд",
+  st_bots: "боты",
+  st_ai: "ai-инженерия",
+  st_pay: "платежи",
+  st_front: "фронт",
+  st_infra: "инфра",
+  chip_orm: "ORM + миграции",
+  chip_webhooks: "вебхуки и поллинг",
+  chip_payflow: "платёжные флоу",
+  chip_claude: "Claude Code / агенты",
+  chip_wh2: "вебхуки",
+  chip_escrow2: "эскроу-логика",
+  chip_resp: "адаптивная вёрстка",
+  chip_ds2: "дизайн-системы",
+  chip_ssh: "SSH-деплой",
+  chip_pw: "Playwright-аудиты",
+
+  contact_eyebrow: "контакт",
+  contact_title: "Расскажите, что собрать.",
+  contact_lede: "Опишите задачу как умеете — я переведу её в план, смету и работающий продукт. " +
+    "Отвечаю быстро, часовой пояс московский.",
+  srv_1: "сайт / веб-сервис под ключ",
+  srv_2: "telegram-бот для бизнеса",
+  srv_3: "ai-фича в ваш продукт",
+  srv_4: "панель управления / админка",
+  cta_write: "Написать в Telegram",
+  footer: "© 2026 KozlovS — собрано руками и AI-агентами, без конструкторов"
+};
+
+var META = {
+  en: { title: "KozlovS — Full-stack developer",
+        desc: "Websites, Telegram bots, payments and AI pipelines. Live products on production servers." },
+  ru: { title: "KozlovS — full-stack разработчик",
+        desc: "Сайты, Telegram-боты, платежи и AI-пайплайны. Живые продукты на боевых серверах." }
+};
+
+(function () {
+  var EN = {};                       // английский снимаем с самой страницы при загрузке
+  var nodes = document.querySelectorAll("[data-i18n]");
+  nodes.forEach(function (el) { EN[el.getAttribute("data-i18n")] = el.innerHTML; });
+
+  function apply(lang) {
+    var dict = lang === "ru" ? RU : EN;
+    nodes.forEach(function (el) {
+      var key = el.getAttribute("data-i18n");
+      if (dict[key] !== undefined) { el.innerHTML = dict[key]; }
+      else if (lang === "ru" && EN[key] !== undefined) { el.innerHTML = EN[key]; }
+    });
+    document.documentElement.lang = lang;
+    document.title = META[lang].title;
+    var d = document.querySelector('meta[name="description"]');
+    if (d) { d.setAttribute("content", META[lang].desc); }
+    document.querySelectorAll(".lang-btn").forEach(function (b) {
+      b.classList.toggle("is-on", b.getAttribute("data-lang") === lang);
+    });
+    try { localStorage.setItem("kozlovs-lang", lang); } catch (e) {}
+  }
+
+  document.querySelectorAll(".lang-btn").forEach(function (b) {
+    b.addEventListener("click", function () { apply(b.getAttribute("data-lang")); });
+  });
+
+  // английский по умолчанию: сайт нацелен на США. Русский — только по явному выбору.
+  var saved = null;
+  try { saved = localStorage.getItem("kozlovs-lang"); } catch (e) {}
+  if (saved === "ru") { apply("ru"); }
+})();
+</script>
 
 <script>
 (function () {
