@@ -228,7 +228,7 @@ a { color: inherit; }
 .win-bar { display: flex; align-items: center; gap: 6px; padding: 9px 12px; border-bottom: 1px solid var(--etch); }
 .win-bar i { width: 8px; height: 8px; border-radius: 50%; background: var(--etch-hi); }
 .win-bar span { margin-left: 8px; font-family: var(--mono); font-size: 11px; color: var(--dim); }
-.win img { display: block; width: 100%; height: auto; aspect-ratio: 16/10; object-fit: cover; object-position: top; }
+.win img { display: block; width: 100%; height: auto; aspect-ratio: 16 / 10; object-fit: cover; object-position: top; }
 
 /* слой 2 — логика: поток платежа */
 .flow { display: flex; flex-direction: column; gap: 12px; width: min(94%, 420px); }
@@ -302,9 +302,21 @@ section { padding-block: clamp(56px, 9vw, 118px); }
 .chips { list-style: none; display: flex; flex-wrap: wrap; gap: 6px; padding: 0; margin: 20px 0 0; }
 .chips li { font-family: var(--mono); font-size: 11.5px; color: var(--dim); border: 1px solid var(--etch); border-radius: 3px; padding: 5px 9px; }
 
-.case-art { position: relative; border: 1px solid var(--etch); border-radius: 8px; background: var(--panel); min-height: 260px; display: grid; place-items: center; overflow: hidden; padding: 24px; }
-.case-art img { display: block; width: 100%; border-radius: 5px; border: 1px solid var(--etch-hi); }
-.art-note { position: absolute; left: 14px; bottom: 12px; font-family: var(--mono); font-size: 10.5px; color: var(--dimmer); background: rgba(11,14,18,.78); padding: 4px 8px; border-radius: 3px; }
+.case-art { position: relative; border: 1px solid var(--etch); border-radius: 8px; background: var(--panel); min-height: 260px; display: grid; place-items: center; overflow: hidden; padding: 24px 24px 46px; }
+.case-art img {
+  display: block; width: 100%;
+  /* height:auto ОБЯЗАТЕЛЕН: атрибут height="1200" в теге — это стиль нулевой
+     специфичности, и без сброса картинка растягивается по вертикали втрое */
+  height: auto; aspect-ratio: 16 / 10; object-fit: cover; object-position: top;
+  border-radius: 5px; border: 1px solid var(--etch-hi);
+}
+.case-art { align-content: center; }
+.art-note {
+  position: absolute; left: 0; right: 0; bottom: 0;
+  font-family: var(--mono); font-size: 10.5px; color: var(--dimmer);
+  background: var(--panel); border-top: 1px solid var(--etch);
+  padding: 8px 16px; text-align: left;
+}
 
 /* мини-визуализации внутри кейсов */
 .wave { display: flex; align-items: center; gap: 3px; height: 60px; }
